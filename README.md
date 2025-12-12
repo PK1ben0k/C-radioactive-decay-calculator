@@ -1,1 +1,1 @@
-# C-radioactive-decay-calculator
+# C++ Radioactive Decay Calculator
