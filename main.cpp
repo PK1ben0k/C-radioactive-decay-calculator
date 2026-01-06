@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip>
 
 int main()
 {
@@ -52,9 +53,10 @@ int main()
         isotope = HALF_LIFE_232Th;
     }
     
-	// the natural logarithm of  2 divided by the half life | decay constant
+	/* decay constant | the natural logarithm of  2 divided by the half life
+	 * print the decay constant as a number with 20 decimal places */
 	const double decay = (std::log(2)) / isotope;
-	std::cout << "Probability per " << unit << " for a single nucleus to decay: " << decay << ".";
+	std::cout << "Probability per " << unit << " for a single nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
 
 	return 0;
 }
