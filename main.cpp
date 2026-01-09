@@ -10,41 +10,46 @@ int main()
 	 * can make this easier to read
 	 */
     
-    std::string unit = "";
-    int MULTIPLIER{};
-    
     /* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
      * if they choose 'seconds' then the half-lives (in
      * the form of years) are converted by multiplying them
      * by the number of gregorian calendar seconds. */
-    std::cout << "Would you like to measure in years or seconds? (y/s)";
+    std::string unit = "";
+    int multiplier{};
+    
     char responseOne{};
-    std::cin >> responseOne;
-    switch (responseOne) {
-        case 'y':
-            unit = "year";
-            MULTIPLIER = 1;
-            break;
-        case 's':
-            unit = "second";
-            MULTIPLIER = 31556952;
-            break;
-        default:
-            std::cout << "Unknown";
-            break;
+    while (true) {
+        std::cout << "Would you like to measure in years, seconds, or minutes? (y/s/m)";
+        std::cin >> responseOne;
+        switch (responseOne) {
+            case 'y':
+                unit = "year";
+                multiplier = 1;
+                break;
+            case 's':
+                unit = "second";
+                multiplier = 31556952;
+                break;
+            case 'm':
+                unit = "minute";
+                multiplier = 31556952/60;
+                break;
+            default:
+                std::cout << "Please enter a valid character.\n";
+                break;
+        }
     }
-   
-	// half-life of uranium isotopes, measured in years with scientific notation.
-	const double HALF_LIFE_233U(1.592e5*MULTIPLIER);
-	const double HALF_LIFE_235U(7.04e8*MULTIPLIER);
-	const double HALF_LIFE_238U(4.463e9*MULTIPLIER);
+	// half-life of uranium isotopes, measured in years (with scientific notation).
+	const double HALF_LIFE_233U(1.592e5*multiplier);
+	const double HALF_LIFE_235U(7.04e8*multiplier);
+	const double HALF_LIFE_238U(4.463e9*multiplier);
 	// plutonium
-	const double HALF_LIFE_239Pu(2.411e4*MULTIPLIER);
+	const double HALF_LIFE_239Pu(2.411e4*multiplier);
 	// thorium
-	const double HALF_LIFE_232Th(1.40e10*MULTIPLIER);
+	const double HALF_LIFE_232Th(1.40e10*multiplier);
 	
 	// user prompt
-	std::cout << "Select a fertile nuclear isotope:\n<1>Uranium-233\n<2>Uranium-235\n<3>Uranium-238\n<4>Plutonium-239\n<5>Thorium-232\n";
+	std::cout << "Select a fertile radioactive isotope:\n<1>Uranium-233\n<2>Uranium-235\n<3>Uranium-238\n<4>Plutonium-239\n<5>Thorium-232\n";
     int responseTwo{};
     std::cin >> responseTwo;
     double isotope{};
