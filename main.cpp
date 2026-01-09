@@ -10,8 +10,9 @@ int main()
 	 * can make this easier to read
 	 */
     
+    const int GREGORIAN_SECONDS = 31556952;
+    
     std::string unit = "";
-    int GREGORIAN_SECONDS = 31556952;
     int multiplier{};
     
     /* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
@@ -20,7 +21,7 @@ int main()
      * by multiplying them by the number of gregorian
      * calendar seconds. dividing it by 60 yields minutes.
      * while loop cannot be exited unless the user enters
-     * the correct characters.*/
+     * the correct characters. */
     bool exitLoop1 = false;
     char response1{};
     while (!exitLoop1) {
