@@ -27,14 +27,17 @@ int main()
                 unit = "year";
                 multiplier = 1;
                 exitLoop = true;
+                break;
             case 's':
                 unit = "second";
                 multiplier = 31556952;
                 exitLoop = true;
+                break;
             case 'm':
                 unit = "minute";
                 multiplier = 31556952/60;
                 exitLoop = true;
+                break;
             default:
                 std::cout << "Please enter a valid character.\n";
                 break;
@@ -60,18 +63,23 @@ int main()
             case 1:
                 isotope = HALF_LIFE_233U;
                 exitLoop2 = true;
+                break;
             case 2:
                 isotope = HALF_LIFE_235U;
                 exitLoop2 = true;
+                break;
             case 3:
                 isotope = HALF_LIFE_238U;
                 exitLoop2 = true;
+                break;
             case 4:
                 isotope = HALF_LIFE_239Pu;
                 exitLoop2 = true;
+                break;
             case 5:
                 isotope = HALF_LIFE_232Th;
                 exitLoop2 = true;
+                break;
             default:
                 std::cout << "Please enter a valid number.\n";
                 break;
