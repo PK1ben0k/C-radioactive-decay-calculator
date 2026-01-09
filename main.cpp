@@ -15,10 +15,12 @@ int main()
     int multiplier{};
     
     /* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
-     * if they choose 'seconds' then the half-lives (in
-     * the form of years) are converted into seconds by
-     * multiplying them by the number of gregorian calendar
-     * seconds. dividing it by 60 yields minutes. */
+     * if they choose 'seconds' then the half-lives
+     * (in the form of years) are converted into seconds
+     * by multiplying them by the number of gregorian
+     * calendar seconds. dividing it by 60 yields minutes.
+     * while loop cannot be exited unless the user enters
+     * the correct characters.*/
     bool exitLoop1 = false;
     char response1{};
     while (!exitLoop1) {
