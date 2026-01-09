@@ -18,14 +18,20 @@ int main()
      * the form of years) are converted by multiplying them
      * by the number of gregorian calendar seconds. */
     std::cout << "Would you like to measure in years or seconds? (y/s)";
-    std::string y_or_s{};
-    std::cin >> y_or_s;
-    if (y_or_s == "y") {
-        unit = "year";
-        MULTIPLIER = 1;
-    } else if (y_or_s == "s") {
-        unit = "second";
-        MULTIPLIER = 31556952;
+    char responseOne{};
+    std::cin >> responseOne;
+    switch (responseOne) {
+        case 'y':
+            unit = "year";
+            MULTIPLIER = 1;
+            break;
+        case 's':
+            unit = "second";
+            MULTIPLIER = 31556952;
+            break;
+        default:
+            std::cout << "Unknown";
+            break;
     }
    
 	// half-life of uranium isotopes, measured in years with scientific notation.
@@ -39,17 +45,18 @@ int main()
 	
 	// user prompt
 	std::cout << "Select a fertile nuclear isotope:\n<1>Uranium-233\n<2>Uranium-235\n<3>Uranium-238\n<4>Plutonium-239\n<5>Thorium-232\n";
+    int responseTwo{};
+    std::cin >> responseTwo;
     double isotope{};
-    std::cin >> isotope;
-    if (isotope == 1) {
+    if (responseTwo == 1) {
         isotope = HALF_LIFE_233U;
-    } else if (isotope == 2) {
+    } else if (responseTwo == 2) {
         isotope = HALF_LIFE_235U;
-    } else if (isotope == 3) {
+    } else if (responseTwo == 3) {
         isotope = HALF_LIFE_238U;
-    } else if (isotope == 4) {
+    } else if (responseTwo == 4) {
         isotope = HALF_LIFE_239Pu;
-    } else if (isotope == 5) {
+    } else if (responseTwo == 5) {
         isotope = HALF_LIFE_232Th;
     }
     
