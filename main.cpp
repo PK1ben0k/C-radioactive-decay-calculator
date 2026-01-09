@@ -10,30 +10,31 @@ int main()
 	 * can make this easier to read
 	 */
     
-    /* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
-     * if they choose 'seconds' then the half-lives (in
-     * the form of years) are converted by multiplying them
-     * by the number of gregorian calendar seconds. */
     std::string unit = "";
     int multiplier{};
-    
+    /* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
+     * if they choose 'seconds' then the half-lives (in
+     * the form of years) are converted into seconds by
+     * multiplying them by the number of gregorian calendar
+     * seconds. dividing it by 60 yields minutes. */
+    bool exitLoop = false;
     char responseOne{};
-    while (true) {
+    while (!exitLoop) {
         std::cout << "Would you like to measure in years, seconds, or minutes? (y/s/m)";
         std::cin >> responseOne;
         switch (responseOne) {
             case 'y':
                 unit = "year";
                 multiplier = 1;
-                break;
+                exitLoop = true;
             case 's':
                 unit = "second";
                 multiplier = 31556952;
-                break;
+                exitLoop = true;
             case 'm':
                 unit = "minute";
                 multiplier = 31556952/60;
-                break;
+                exitLoop = true;
             default:
                 std::cout << "Please enter a valid character.\n";
                 break;
