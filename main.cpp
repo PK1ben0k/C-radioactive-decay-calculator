@@ -44,7 +44,7 @@ int main()
                 exitLoop1 = true;
                 break;
             default:
-                std::cout << "Please enter a valid character.\n";
+                std::cout << "Please enter a valid character. ";
                 break;
         }
     }
@@ -59,34 +59,34 @@ int main()
 	
 	// user prompt
 	bool exitLoop2 = false;
-	int response2{};
+	char response2{};
 	double isotope{};
 	while (!exitLoop2) {
         std::cout << "Select a fertile radioactive isotope:\n<1>Uranium-233\n<2>Uranium-235\n<3>Uranium-238\n<4>Plutonium-239\n<5>Thorium-232\n";
 	    std::cin >> response2;
         switch (response2) {
-            case 1:
+            case '1':
                 isotope = HALF_LIFE_233U;
                 exitLoop2 = true;
                 break;
-            case 2:
+            case '2':
                 isotope = HALF_LIFE_235U;
                 exitLoop2 = true;
                 break;
-            case 3:
+            case '3':
                 isotope = HALF_LIFE_238U;
                 exitLoop2 = true;
                 break;
-            case 4:
+            case '4':
                 isotope = HALF_LIFE_239Pu;
                 exitLoop2 = true;
                 break;
-            case 5:
+            case '5':
                 isotope = HALF_LIFE_232Th;
                 exitLoop2 = true;
                 break;
             default:
-                std::cout << "Please enter a valid number.\n";
+                std::cout << "Please enter a valid number. ";
                 break;
         }
     }
