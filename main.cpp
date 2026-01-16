@@ -1,7 +1,13 @@
 #include <iostream>
+#include <vector>
 #include <string>
 #include <cmath>
 #include <iomanip>
+
+struct Isotopes {
+                    std::string name;
+                    long double value;
+                };
 
 int main()
 {
@@ -51,64 +57,52 @@ int main()
 		}
 	}
 	
-	// half-life of uranium isotopes, measured in years (with scientific notation).
-	std::string _233U = "Uranium-233";
-	const double HALF_LIFE_233U(1.592e5*multiplier);
-	
-	std::string _235U = "Uranium-235";
-	const double HALF_LIFE_235U(7.04e8*multiplier);
-	
-	std::string _238U = "Uranium-238";
-	const double HALF_LIFE_238U(4.463e9*multiplier);
-	// plutonium
-	std::string _239Pu = "Plutonium-239";
-	const double HALF_LIFE_239Pu(2.411e4*multiplier);
-	// thorium
-	std::string _232Th = "Thorium-232";
-	const double HALF_LIFE_232Th(1.40e10*multiplier);
-
-	// user prompt
-	bool exitLoop2 = false;
-	std::string response2{};
-	double isotopeValue{};
-	std::string isotopeName = "";
-	std::cout << "Select a fertile radioactive isotope:\n<1>" << _233U << "\n<2>" << _235U << "\n<3>" << _238U << "\n<4>" << _239Pu << "\n<5>" << _232Th << "\n";
+	std::vector<Isotopes> isotopes =
+	    {
+	        {"Uranium-233",1.592e5*multiplier},
+	        {"Uranium-235",7.04e8*multiplier},
+	        {"Uranium-238",4.463e9*multiplier},
+	        {"Plutonium-239",2.411e4*multiplier},
+	        {"Thorium-232",1.40e10*multiplier}
+	    };
+    
+    // user prompt
+    bool exitLoop2 = false;
+	int response2{};
+	int count = 0;
+	std::cout << "Select a fertile radioactive isotope:\n";
+	for (const auto & i:isotopes) {
+        count += 1;
+        std::cout << '<' << count << '>' << i.name << '\n';
+    }
     while (!exitLoop2) {
 		std::cin >> response2;
-		if (response2 == "1") {
-			isotopeValue = HALF_LIFE_233U;
-			isotopeName = _233U;
+		if (response2 == 1) {
 			exitLoop2 = true;
 		}
-		else if (response2 == "2") {
-			isotopeValue = HALF_LIFE_235U;
-			isotopeName = _235U;
+		else if (response2 == 2) {
 			exitLoop2 = true;
 		}
-		else if (response2 == "3") {
-			isotopeValue = HALF_LIFE_238U;
-			isotopeName = _238U;
+		else if (response2 == 3) {
 			exitLoop2 = true;
 		}
-		else if (response2 == "4") {
-			isotopeValue = HALF_LIFE_239Pu;
-			isotopeName = _239Pu;
+		else if (response2 == 4) {
 			exitLoop2 = true;
 		}
-		else if (response2 == "5") {
-			isotopeValue = HALF_LIFE_232Th;
-			isotopeName = _232Th;
+		else if (response2 == 5) {
 			exitLoop2 = true;
 		}
 		else {
 			std::cout << errorMessage;
 		}
 	}
-
+	
 	/* decay constant | the natural logarithm of  2 divided by the half life.
 	 * print the decay constant as a number with 20 decimal places. */
-	const double decay = (std::log(2)) / isotopeValue;
-	std::cout << "Probability per " << unit << " for a single " << isotopeName << " nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
-
+	const double decay = (std::log(2)) / isotopes[response2-1].value;
+	std::cout
+	    << "Probability per " << unit << " for a single " << isotopes[response2-1].name
+	    << " nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
+	
 	return 0;
 }
