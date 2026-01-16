@@ -28,9 +28,10 @@ int main()
 	 * yields hours. */
     const int GREGORIAN_SECONDS = 31556952;
     std::vector<Measurement> measurement =  {
-                                                {"y","years",GREGORIAN_SECONDS/GREGORIAN_SECONDS},
-                                                {"s","seconds",GREGORIAN_SECONDS/1},
-                                                {"h","hours",GREGORIAN_SECONDS/3600}
+                                                {"s","second",GREGORIAN_SECONDS/1},
+                                                {"m","minute",GREGORIAN_SECONDS/60},
+                                                {"h","hour",GREGORIAN_SECONDS/3600},
+                                                {"y","year",GREGORIAN_SECONDS/GREGORIAN_SECONDS}
                                             };
 	
 	std::string errorMessage = "Invalid character. ";
@@ -44,7 +45,12 @@ int main()
 	bool exitLoop1 = false;
 	std::string response1{};
 	int stringToInt{};
-    std::cout << "Would you like to measure in years, seconds, or hours (y/s/h)? ";
+    std::cout
+        << "Would you like to measure in "
+        << measurement[0].unit << "s, "
+        << measurement[1].unit << "s, "
+        << measurement[2].unit << "s, or "
+        << measurement[3].unit << "s? (s/m/h/y)? ";
 	while (!exitLoop1) {
 		std::cin >> response1;
     	if (response1 == measurement[0].character) {
@@ -57,6 +63,10 @@ int main()
 		}
 		else if (response1 == measurement[2].character) {
 			stringToInt = 3;
+			exitLoop1 = true;
+		}
+		else if (response1 == measurement[3].character) {
+			stringToInt = 4;
 			exitLoop1 = true;
 		}
 		else {
