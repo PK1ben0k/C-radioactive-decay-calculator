@@ -45,28 +45,28 @@ int main()
 	bool exitLoop1 = false;
 	std::string response1{};
 	int stringToInt{};
-    int count2{};
+    int count1{};
     std::cout << "Would you like to measure in:\n";
     for (const auto & m:measurement) {
-        std::cout << "<" << measurement[count2].character << "> " << measurement[count2].unit << "s\n";
-        count2 += 1;
+        std::cout << "<" << measurement[count1].character << "> " << measurement[count1].unit << "s\n";
+        count1 += 1;
     }
 	while (!exitLoop1) {
 		std::cin >> response1;
     	if (response1 == measurement[0].character) {
-			stringToInt = 1;
+			stringToInt = 0;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[1].character) {
-			stringToInt = 2;
+			stringToInt = 1;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[2].character) {
-			stringToInt = 3;
+			stringToInt = 2;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[3].character) {
-			stringToInt = 4;
+			stringToInt = 3;
 			exitLoop1 = true;
 		}
 		else {
@@ -86,11 +86,11 @@ int main()
     // user prompt
     bool exitLoop2 = false;
 	int response2{};
-	int count = 0;
+	int count2 = 0;
 	std::cout << "Select a fertile radioactive isotope:\n";
 	for (const auto & i:isotopes) {
-        count += 1;
-        std::cout << "<" << count << "> " << i.name << '\n';
+        count2 += 1;
+        std::cout << "<" << count2 << "> " << i.name << '\n';
     }
     while (!exitLoop2) {
 		std::cin >> response2;
@@ -122,7 +122,7 @@ int main()
 	 * present in the index, it would not return anything. */
 	const double decay = (std::log(2)) / isotopes[response2-1].value;
 	std::cout
-	    << "Probability per " << measurement[stringToInt-1].unit << " for a single " << isotopes[response2-1].name
+	    << "Probability per " << measurement[stringToInt].unit << " for a single " << isotopes[response2-1].name
 	    << " nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
 	
 	return 0;
