@@ -45,12 +45,12 @@ int main()
 	bool exitLoop1 = false;
 	std::string response1{};
 	int stringToInt{};
-    std::cout
-        << "Would you like to measure in "
-        << measurement[0].unit << "s, "
-        << measurement[1].unit << "s, "
-        << measurement[2].unit << "s, or "
-        << measurement[3].unit << "s? (s/m/h/y)? ";
+    int count2{};
+    std::cout << "Would you like to measure in:\n";
+    for (const auto & m:measurement) {
+        std::cout << "<" << measurement[count2].character << "> " << measurement[count2].unit << "s\n";
+        count2 += 1;
+    }
 	while (!exitLoop1) {
 		std::cin >> response1;
     	if (response1 == measurement[0].character) {
@@ -90,7 +90,7 @@ int main()
 	std::cout << "Select a fertile radioactive isotope:\n";
 	for (const auto & i:isotopes) {
         count += 1;
-        std::cout << '<' << count << '>' << i.name << '\n';
+        std::cout << "<" << count << "> " << i.name << '\n';
     }
     while (!exitLoop2) {
 		std::cin >> response2;
