@@ -44,7 +44,7 @@ int main()
 	 * for their ability to use strings and logical comparisons. */
 	bool exitLoop1 = false;
 	std::string response1{};
-	int stringToInt{};
+	int responseIndex1{};
     int count1{};
     std::cout << "Would you like to measure in:\n";
     for (const auto & m:measurement) {
@@ -54,19 +54,19 @@ int main()
 	while (!exitLoop1) {
 		std::cin >> response1;
     	if (response1 == measurement[0].character) {
-			stringToInt = 0;
+			responseIndex1 = 0;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[1].character) {
-			stringToInt = 1;
+			responseIndex1 = 1;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[2].character) {
-			stringToInt = 2;
+			responseIndex1 = 2;
 			exitLoop1 = true;
 		}
 		else if (response1 == measurement[3].character) {
-			stringToInt = 3;
+			responseIndex1 = 3;
 			exitLoop1 = true;
 		}
 		else {
@@ -76,11 +76,11 @@ int main()
 	
 	std::vector<Isotopes> isotopes =
 	    {
-	        {"Uranium-233",1.592e5*measurement[stringToInt].multiplier},
-	        {"Uranium-235",7.04e8*measurement[stringToInt].multiplier},
-	        {"Uranium-238",4.463e9*measurement[stringToInt].multiplier},
-	        {"Plutonium-239",2.411e4*measurement[stringToInt].multiplier},
-	        {"Thorium-232",1.40e10*measurement[stringToInt].multiplier}
+	        {"Uranium-233",1.592e5*measurement[responseIndex1].multiplier},
+	        {"Uranium-235",7.04e8*measurement[responseIndex1].multiplier},
+	        {"Uranium-238",4.463e9*measurement[responseIndex1].multiplier},
+	        {"Plutonium-239",2.411e4*measurement[responseIndex1].multiplier},
+	        {"Thorium-232",1.40e10*measurement[responseIndex1].multiplier}
 	    };
     
     // user prompt
@@ -113,17 +113,18 @@ int main()
 			std::cout << errorMessage;
 		}
 	}
-	
-	/* decay constant | the natural logarithm of  2 divided by the half life.
-	 * print the decay constant as a number with 20 decimal places.
-	 * since the index "[]" for a vector begins at 0, "-1" is used
+	/* since the index "[]" for a vector begins at 0, "-1" is used
 	 * (since user responses begin at 1). if this was not used,
 	 * then response2 would equal 6 instead of 5. since 6 is not 
 	 * present in the index, it would not return anything. */
-	const double decay = (std::log(2)) / isotopes[response2-1].value;
+	int responseIndex2{response2-1};
+	
+	/* decay constant | the natural logarithm of  2 divided by the half life.
+	 * print the decay constant as a number with 20 decimal places. */
+	const double decay = (std::log(2)) / isotopes[responseIndex2].value;
 	std::cout
-	    << "Probability per " << measurement[stringToInt].unit << " for a single " << isotopes[response2-1].name
-	    << " nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
+	    << "Probability per " << measurement[responseIndex1].unit << " for a single " << isotopes[response2-1].name
+	    << " nucleus to decay: " << std::fixed << std::setprecision(25) << decay;
 	
 	return 0;
 }
