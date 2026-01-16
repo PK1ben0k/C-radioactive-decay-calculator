@@ -31,6 +31,7 @@ int main()
                                                 {"s","second",GREGORIAN_SECONDS/1},
                                                 {"m","minute",GREGORIAN_SECONDS/60},
                                                 {"h","hour",GREGORIAN_SECONDS/3600},
+                                                {"d","day",GREGORIAN_SECONDS/86400},
                                                 {"y","year",GREGORIAN_SECONDS/GREGORIAN_SECONDS}
                                             };
 	
@@ -67,6 +68,10 @@ int main()
 		}
 		else if (response1 == measurement[3].character) {
 			responseIndex1 = 3;
+			exitLoop1 = true;
+		}
+		else if (response1 == measurement[4].character) {
+			responseIndex1 = 4;
 			exitLoop1 = true;
 		}
 		else {
