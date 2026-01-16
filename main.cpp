@@ -5,6 +5,7 @@
 #include <iomanip>
 
 struct Measurement  {
+                        std::string character;
                         std::string unit;
                         int multiplier;
                     };
@@ -20,21 +21,22 @@ int main()
 	 * can make this easier to read
 	 */
     
+    /* if they choose 'seconds' then the half-lives (in the form of years,
+     * scientific notation) are converted into seconds by multiplying
+	 * them by the number of seconds in the gregorian calendar.
+	 * dividing them by 3600 (amount of seconds in an hour)
+	 * yields hours. */
     const int GREGORIAN_SECONDS = 31556952;
     std::vector<Measurement> measurement =  {
-                                                {"years",GREGORIAN_SECONDS/GREGORIAN_SECONDS},
-                                                {"seconds",GREGORIAN_SECONDS/1},
-                                                {"hours",GREGORIAN_SECONDS/3600}
+                                                {"y","years",GREGORIAN_SECONDS/GREGORIAN_SECONDS},
+                                                {"s","seconds",GREGORIAN_SECONDS/1},
+                                                {"h","hours",GREGORIAN_SECONDS/3600}
                                             };
 	
 	std::string errorMessage = "Invalid character. ";
 
 	/* user prompt. 'print' = (std::cout <<). 'submit' = (std::cin >>).
-	 * if they choose 'seconds' then the half-lives
-	 * (in the form of years) are converted into seconds by multiplying
-	 * them by the number of seconds in the gregorian calendar.
-	 * dividing them by 3600 (amount of seconds in an hour)
-	 * yields hours. exitLoop1 is initialized as false. while (exitLoop1)
+	 * exitLoop1 is initialized as false. while (exitLoop1)
 	 * means "while exitLoop1 is true". the (!) makes it negative.
 	 * exitLoop1 only becomes "true" by entering valid characters.
 	 * "if-else" conditionals are utilized instead of "switch" statements
@@ -45,15 +47,15 @@ int main()
     std::cout << "Would you like to measure in years, seconds, or hours (y/s/h)? ";
 	while (!exitLoop1) {
 		std::cin >> response1;
-    	if (response1 == "y") {
+    	if (response1 == measurement[0].character) {
 			stringToInt = 1;
 			exitLoop1 = true;
 		}
-		else if (response1 == "s") {
+		else if (response1 == measurement[1].character) {
 			stringToInt = 2;
 			exitLoop1 = true;
 		}
-		else if (response1 == "h") {
+		else if (response1 == measurement[2].character) {
 			stringToInt = 3;
 			exitLoop1 = true;
 		}
@@ -103,7 +105,11 @@ int main()
 	}
 	
 	/* decay constant | the natural logarithm of  2 divided by the half life.
-	 * print the decay constant as a number with 20 decimal places. */
+	 * print the decay constant as a number with 20 decimal places.
+	 * since the index "[]" for a vector begins at 0, "-1" is used
+	 * (since user responses begin at 1). if this was not used,
+	 * then response2 would equal 6 instead of 5. since 6 is not 
+	 * present in the index, it would not return anything. */
 	const double decay = (std::log(2)) / isotopes[response2-1].value;
 	std::cout
 	    << "Probability per " << measurement[stringToInt-1].unit << " for a single " << isotopes[response2-1].name
