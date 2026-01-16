@@ -4,6 +4,10 @@
 #include <cmath>
 #include <iomanip>
 
+struct Measurement  {
+                        std::string unit;
+                        int multiplier;
+                    };
 struct Isotopes {
                     std::string name;
                     long double value;
@@ -15,10 +19,13 @@ int main()
 	 * the matching asterisks to the left
 	 * can make this easier to read
 	 */
-
-	const int GREGORIAN_SECONDS = 31556952;
-	std::string unit = "";
-	int multiplier{};
+    
+    const int GREGORIAN_SECONDS = 31556952;
+    std::vector<Measurement> measurement =  {
+                                                {"years",GREGORIAN_SECONDS/GREGORIAN_SECONDS},
+                                                {"seconds",GREGORIAN_SECONDS/1},
+                                                {"hours",GREGORIAN_SECONDS/3600}
+                                            };
 	
 	std::string errorMessage = "Invalid character. ";
 
@@ -34,22 +41,20 @@ int main()
 	 * for their ability to use strings and logical comparisons. */
 	bool exitLoop1 = false;
 	std::string response1{};
+	int stringToInt{};
     std::cout << "Would you like to measure in years, seconds, or hours (y/s/h)? ";
 	while (!exitLoop1) {
 		std::cin >> response1;
-		if (response1 == "y") {
-			unit = "year";
-			multiplier = 1;
+    	if (response1 == "y") {
+			stringToInt = 1;
 			exitLoop1 = true;
 		}
 		else if (response1 == "s") {
-			unit = "second";
-			multiplier = GREGORIAN_SECONDS;
+			stringToInt = 2;
 			exitLoop1 = true;
 		}
 		else if (response1 == "h") {
-			unit = "hour";
-			multiplier = GREGORIAN_SECONDS/3600;
+			stringToInt = 3;
 			exitLoop1 = true;
 		}
 		else {
@@ -59,11 +64,11 @@ int main()
 	
 	std::vector<Isotopes> isotopes =
 	    {
-	        {"Uranium-233",1.592e5*multiplier},
-	        {"Uranium-235",7.04e8*multiplier},
-	        {"Uranium-238",4.463e9*multiplier},
-	        {"Plutonium-239",2.411e4*multiplier},
-	        {"Thorium-232",1.40e10*multiplier}
+	        {"Uranium-233",1.592e5*measurement[stringToInt].multiplier},
+	        {"Uranium-235",7.04e8*measurement[stringToInt].multiplier},
+	        {"Uranium-238",4.463e9*measurement[stringToInt].multiplier},
+	        {"Plutonium-239",2.411e4*measurement[stringToInt].multiplier},
+	        {"Thorium-232",1.40e10*measurement[stringToInt].multiplier}
 	    };
     
     // user prompt
@@ -101,7 +106,7 @@ int main()
 	 * print the decay constant as a number with 20 decimal places. */
 	const double decay = (std::log(2)) / isotopes[response2-1].value;
 	std::cout
-	    << "Probability per " << unit << " for a single " << isotopes[response2-1].name
+	    << "Probability per " << measurement[stringToInt-1].unit << " for a single " << isotopes[response2-1].name
 	    << " nucleus to decay: " << std::fixed << std::setprecision(20) << decay;
 	
 	return 0;
